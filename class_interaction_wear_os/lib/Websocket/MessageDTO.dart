@@ -12,7 +12,8 @@ enum Status {
   QUIZ,
   QUIZUPDATE,
   EVALUATION,
-  PEOPLESTATUS
+  PEOPLESTATUS,
+  WATCH,
   // open 사용자입장
   // close 사용자퇴장
   // opinion 의견제출하기

@@ -101,4 +101,7 @@ class OpinionService extends ChangeNotifier {
     // 정렬된 데이터를 반영한 후에 애니메이션을 적용하기 위해 notifyListeners() 호출
     notifyListeners();
   }
+
+
+  
 }
