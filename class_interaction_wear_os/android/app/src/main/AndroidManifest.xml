@@ -1,4 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<uses-feature android:name="android.hardware.type.watch" />
     <application
         android:label="class_interaction_wear_os"
         android:name="${applicationName}"
