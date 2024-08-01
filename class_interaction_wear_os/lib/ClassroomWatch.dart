@@ -8,10 +8,14 @@ class Classroomwatch extends StatefulWidget {
 }
 
 class _Classroomwatch extends State<Classroomwatch> {
-  @override
-  void initState() {
-    super.initState();
-  }
+  final List<Color> _colors = [
+    Color(0xff7b9bcf),
+    Color(0xfff5c369),
+    Color(0xffa4d3fb),
+    Color(0xfff7a3b5),
+    Color(0xfffcb29c),
+    Color(0xffcab3e7),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -22,28 +26,28 @@ class _Classroomwatch extends State<Classroomwatch> {
         scaffoldBackgroundColor: Colors.black,
       ),
       home: Scaffold(
-        body: ListView.separated(
-          itemCount: 10,
-          itemBuilder: (context, index) {
-            return Card(
-              color: Colors.grey[900],
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15.0),
-              ),
-              elevation: 5,
-              child: ListTile(
-                title: Center(
-                  child: Text(
-                    "Item fsdafdsafdasfasdfsdfsd$index",
-                    style: TextStyle(color: Colors.white),
+        body: Padding(
+          padding: const EdgeInsets.all(16.0), // 가로 여백 설정
+          child: ListView.builder(
+            itemCount: 10,
+            itemBuilder: (context, index) {
+              return Card(
+                color: _colors[index % _colors.length],
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25.0),
+                ),
+                elevation: 5,
+                child: ListTile(
+                  title: Center(
+                    child: Text(
+                      "Item $index",
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
                 ),
-              ),
-            );
-          },
-          separatorBuilder: (context, index) {
-            return Divider();
-          },
+              );
+            },
+          ),
         ),
       ),
     );
