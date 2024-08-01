@@ -20,7 +20,7 @@ class Websocket {
   late BuildContext context;
 
   // late BuildContext context;
-  Websocket(this.classId, this.user, this.jwt, this.context) {
+  Websocket(this.classId, this.user, this.context) {
     stompClient = stomClient(jwt, context);
     stompClient?.activate();
   }

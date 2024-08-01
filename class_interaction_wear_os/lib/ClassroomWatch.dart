@@ -1,16 +1,28 @@
+import 'dart:io';
+
+import 'package:class_interaction_wear_os/Websocket/Websocket.dart';
+import 'package:class_interaction_wear_os/classroom.dart';
 import 'package:flutter/material.dart';
 
 class Classroomwatch extends StatefulWidget {
-  const Classroomwatch({Key? key}) : super(key: key);
+  String classroom;
+  WebSocket? websocket;
+  Classroomwatch(this.classroom, {super.key});
 
   @override
   State<Classroomwatch> createState() => _Classroomwatch();
 }
 
 class _Classroomwatch extends State<Classroomwatch> {
+  WebSocket? websocket;
+
   @override
   void initState() {
     super.initState();
+  }
+
+  void webSocketConnected(Classroom classroom) {
+     websocket = await Websocket(widget.classroom.classId, user, jwt, context);
   }
 
   @override

@@ -1,3 +1,5 @@
+import 'package:class_interaction_wear_os/Websocket/Dialogs.dart';
+import 'package:class_interaction_wear_os/classroomWatch.dart';
 import 'package:flutter/material.dart';
 
 class Enter extends StatefulWidget {
@@ -10,6 +12,7 @@ class _EnterState extends State<Enter> {
 
   @override
   Widget build(BuildContext context) {
+    String value = "";
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -25,20 +28,27 @@ class _EnterState extends State<Enter> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextField(
-                controller: _controller,
-                keyboardType: TextInputType.number,
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 10),
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Enter number',
-                ),
-              ),
+                  controller: _controller,
+                  keyboardType: TextInputType.number,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 10),
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: '수업숫자 입력',
+                  ),
+                  onChanged: (text) {
+                    value = text;
+                  }),
               SizedBox(height: 10),
               ElevatedButton(
                 onPressed: () {
-                  // 입력된 숫자를 처리하는 로직을 여기에 추가
-                  print('Entered number: ${_controller.text}');
+                  if (value == "") {
+                    Dialogs.showErrorDialog(context, "수업 입력");
+                  }
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Classroomwatch(value)));
                 },
                 child: Text('Submit', style: TextStyle(fontSize: 10)),
               ),
