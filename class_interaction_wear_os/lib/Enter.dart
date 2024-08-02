@@ -44,6 +44,7 @@ class _EnterState extends State<Enter> {
                     borderRadius: BorderRadius.circular(25.0), // 라운드 처리
                   ),
                   hintText: '수업 코드 입력',
+                  hintStyle: TextStyle(color: Colors.white),
                   labelStyle: TextStyle(color: Colors.white), // 라벨 색상 변경
                   filled: true,
                   fillColor: Colors.grey[800], // 텍스트 박스 배경색 설정
