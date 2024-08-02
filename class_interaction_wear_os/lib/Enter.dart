@@ -43,7 +43,7 @@ class _EnterState extends State<Enter> {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(25.0), // 라운드 처리
                   ),
-                  labelText: '수업 코드 입력',
+                  hintText: '수업 코드 입력',
                   labelStyle: TextStyle(color: Colors.white), // 라벨 색상 변경
                   filled: true,
                   fillColor: Colors.grey[800], // 텍스트 박스 배경색 설정
@@ -64,6 +64,9 @@ class _EnterState extends State<Enter> {
                     var classroomService = ClassroomService();
                     Classroom? classroom = await classroomService
                         .studentEnterClassPin(context, value);
+                    setState(() {
+                      value = "";
+                    });
                     Navigator.push(
                         context,
                         MaterialPageRoute(

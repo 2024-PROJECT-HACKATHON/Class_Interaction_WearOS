@@ -83,25 +83,4 @@ class OpinionService extends ChangeNotifier {
     }
     return maxIndex;
   }
-
-  void sortOpinion() {
-    // 두 리스트를 연결하여 정렬하는 방법을 사용합니다.
-    List<MapEntry<Opinion, OpinionVote>> combinedList = [];
-    for (int i = 0; i < opinionList.length; i++) {
-      combinedList.add(MapEntry(opinionList[i], countList[i]));
-    }
-
-    // count 값을 기준으로 내림차순으로 정렬합니다.
-    combinedList.sort((a, b) => b.value.count.compareTo(a.value.count));
-
-    // 정렬된 결과를 다시 각각의 리스트에 반영합니다.
-    opinionList = combinedList.map((entry) => entry.key).toList();
-    countList = combinedList.map((entry) => entry.value).toList();
-
-    // 정렬된 데이터를 반영한 후에 애니메이션을 적용하기 위해 notifyListeners() 호출
-    notifyListeners();
-  }
-
-
-  
 }

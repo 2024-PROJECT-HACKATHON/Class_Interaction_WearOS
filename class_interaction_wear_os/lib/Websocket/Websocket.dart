@@ -67,9 +67,13 @@ class Websocket {
             }
             break;
           case Status.OPINIONUPDATE:
-            Provider.of<OpinionService>(context, listen: false)
-                .setOpinionList(message.opList);
-            print("체크");
+            Provider.of<OpinionService>(context, listen: false).deleteAll();
+            if (message.opList!.isNotEmpty) {
+              for (int i = 0; i < message.opList!.length; i++) {
+                Provider.of<OpinionService>(context, listen: false)
+                    .addOpinion(opinion: message.opList![i]);
+              }
+            }
             break;
           case Status.OPINIONINITIALIZE:
             Provider.of<OpinionService>(context, listen: false)

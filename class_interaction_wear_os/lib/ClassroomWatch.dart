@@ -61,38 +61,56 @@ class _Classroomwatch extends State<Classroomwatch> {
       ),
       home: Scaffold(
         body: Padding(
-          padding: const EdgeInsets.all(16.0), // 가로 여백 설정
+          padding: const EdgeInsets.all(20.0), // 가로 여백 설정
           child: Consumer<OpinionService>(
               builder: (context, opinionService, child) {
             List<Opinion> opinionList = opinionService.opinionList; // 옵션 배열
             List<OpinionVote> opinionCount = opinionService.countList;
 
-            return opinionList.isNotEmpty
-                ? ListView.builder(
-                    itemCount: opinionList.length,
-                    itemBuilder: (context, index) {
-                      return Card(
-                        color: _colors[index % _colors.length],
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25.0),
+            if (opinionList.isNotEmpty) {
+              // Combine the opinions and their counts into a single list
+              List<Map<String, dynamic>> combinedList = List.generate(
+                opinionList.length,
+                (index) => {
+                  'opinion': opinionList[index],
+                  'count': opinionCount[index]
+                },
+              );
+
+              // Sort the combined list based on counts in descending order
+              combinedList
+                  .sort((a, b) => b['count'].count.compareTo(a['count'].count));
+
+              return ListView.builder(
+                itemCount: combinedList.length,
+                itemBuilder: (context, index) {
+                  Opinion opinion = combinedList[index]['opinion'];
+                  OpinionVote count = combinedList[index]['count'];
+                  return Card(
+                    color: _colors[index % _colors.length],
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25.0),
+                    ),
+                    elevation: 5,
+                    child: ListTile(
+                      title: Center(
+                        child: Text(
+                          "${opinion.opinion} : ${count.count}",
+                          style: TextStyle(color: Colors.white, fontSize: 10),
                         ),
-                        elevation: 5,
-                        child: ListTile(
-                          title: Center(
-                            child: Text(
-                              "${opinionList[index].opinion}   : ${opinionCount[index].count}",
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                  )
-                : Center(
-                    child: Text(
-                    "의견이없습니다",
-                    style: TextStyle(color: Colors.white),
-                  ));
+                      ),
+                    ),
+                  );
+                },
+              );
+            } else {
+              return Center(
+                child: Text(
+                  "의견이없습니다",
+                  style: TextStyle(color: Colors.white),
+                ),
+              );
+            }
           }),
         ),
       ),
